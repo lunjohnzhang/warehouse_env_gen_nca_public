@@ -1,0 +1,20 @@
+{
+    "name": "kiva_shelf_less_w_endpoint",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 12,
+    "n_endpoint": 0,
+    "n_agent_loc": 0,
+    "maxtime": 5000,
+    "layout": [
+        "e....e....e.",
+        "@eee.@e@e.@e",
+        ".e@@ee@@eee.",
+        ".e@ee..ee@@e",
+        "..e@@e.@ee@e",
+        "...e@e@e..e@",
+        "..e@@@e.....",
+        "..@ee.......",
+        ".e@e........"
+    ]
+}

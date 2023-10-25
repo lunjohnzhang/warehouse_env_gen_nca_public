@@ -1,0 +1,20 @@
+{
+    "name": "kiva_dummy_debug2",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "n_endpoint": 36,
+    "n_agent_loc": 0,
+    "maxtime": 5000,
+    "layout": [
+        "...e@e@e..ee@...",
+        "w.e@e.....@.e..w",
+        "...e@.e@e.e.....",
+        "....e.e@e...@e..",
+        "w.e.....@e@.e..w",
+        "..@e@e.ee.e.....",
+        ".....e.@..@.ee..",
+        "w..e@@.e.ee.@@.w",
+        "....ee...@e.ee.."
+    ]
+}

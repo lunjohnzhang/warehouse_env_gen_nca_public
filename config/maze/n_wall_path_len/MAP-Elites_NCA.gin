@@ -1,0 +1,93 @@
+# Macros:
+# ======================================================================================================================
+measure_dim = 2
+num_objects = 2
+sigma0 = 0.2
+sol_size = 1730
+
+# Parameters for experiment:
+# ======================================================================================================================
+experiment.name = 'Maze Generation ME-IsoLine NCA'
+
+# Parameters for GridArchive:
+# ======================================================================================================================
+GridArchive.dims = [256, 162]
+GridArchive.ranges = [[0, 256], [0, 648]]
+GridArchive.solution_dim = %sol_size
+
+# Parameters for downsample/GridArchive:
+# ======================================================================================================================
+downsample/GridArchive.dims = [32, 27]
+downsample/GridArchive.ranges = [[0, 256], [0, 648]]
+downsample/GridArchive.solution_dim = %sol_size
+
+# Parameters for IsoLineEmitter:
+# ======================================================================================================================
+IsoLineEmitter.batch_size = 30
+IsoLineEmitter.iso_sigma = 0.01
+IsoLineEmitter.line_sigma = %sigma0
+
+# Parameters for Manager:
+# ======================================================================================================================
+Manager.archive_save_freq = -1
+Manager.archive_type = @GridArchive
+Manager.emitter_types = [(@IsoLineEmitter, 5)]
+Manager.env_manager_class = @MazeManager
+Manager.initial_sols = 100
+Manager.inner_itrs = 10000
+Manager.is_cma_mae = False
+Manager.is_em = False
+Manager.max_evals = 100000
+Manager.plot_metrics_freq = 1
+Manager.reload_save_freq = 1
+Manager.sol_size = %sol_size
+
+# Parameters for MapElitesBaselineMazeEmitter:
+# ======================================================================================================================
+MapElitesBaselineMazeEmitter.batch_size = 30
+MapElitesBaselineMazeEmitter.initial_population = 100
+MapElitesBaselineMazeEmitter.mutation_k = 10
+MapElitesBaselineMazeEmitter.num_objects = %num_objects
+
+# Parameters for MazeConfig:
+# ======================================================================================================================
+MazeConfig.measure_names = ['num_blocks', 'agent_path_length']
+MazeConfig.objective_name = 'accel_none'
+
+# Parameters for MazeConvolutional:
+# ======================================================================================================================
+MazeConvolutional.head_dimensions = [1, 1, 1]
+MazeConvolutional.i_size = 16
+MazeConvolutional.n_extra_layers = 0
+MazeConvolutional.nc = 5
+MazeConvolutional.ndf = 64
+
+# Parameters for MazeEmulationModel:
+# ======================================================================================================================
+MazeEmulationModel.network_type = @MazeConvolutional
+MazeEmulationModel.prediction_type = 'regression'
+MazeEmulationModel.train_batch_size = 64
+MazeEmulationModel.train_epochs = 200
+MazeEmulationModel.train_sample_size = 20000
+
+# Parameters for MazeManager:
+# ======================================================================================================================
+MazeManager.is_nca = True
+MazeManager.lvl_height = 16
+MazeManager.lvl_width = 16
+MazeManager.n_evals = 50
+MazeManager.nca_iter = 50
+MazeManager.num_objects = %num_objects
+MazeManager.seed_env_path = 'maps/maze/nca/maze_small_seed_block.json'
+
+# Parameters for MazeNCA:
+# ======================================================================================================================
+MazeNCA.kernel_size = 3
+MazeNCA.n_aux_chan = 0
+MazeNCA.n_hid_chan = 32
+MazeNCA.nc = 2
+
+# Parameters for RLAgentConfig:
+# ======================================================================================================================
+RLAgentConfig.model_path = 'accel_seed_1/model_20000.tar'
+RLAgentConfig.recurrent_hidden_size = 256

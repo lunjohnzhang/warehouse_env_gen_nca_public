@@ -1,0 +1,20 @@
+{
+    "name": "kiva_comp",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 20,
+    "n_endpoint": 0,
+    "n_agent_loc": 0,
+    "maxtime": 5000,
+    "layout": [
+        "..e....e....e...",
+        "w.@eee.@e@e.@e.w",
+        "...e@@ee@@eee...",
+        "...e@ee..ee@@e..",
+        "w...e@@e.@ee@e.w",
+        ".....e@e@e..e@..",
+        "....e@@@e.......",
+        "w...@ee........w",
+        "...e@e.........."
+    ]
+}

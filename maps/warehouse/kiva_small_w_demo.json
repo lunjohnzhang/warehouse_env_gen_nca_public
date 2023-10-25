@@ -1,0 +1,20 @@
+{
+    "name": "kiva_small_w_demo",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "n_endpoint": 48,
+    "n_agent_loc": 24,
+    "maxtime": 5000,
+    "layout": [
+        "................",
+        "w.eeeeeeeeeeee.w",
+        "..@@@@@@@@@@@@..",
+        "..eeeeeeeeeeee..",
+        "w..............w",
+        "..eeeeeeeeeeee..",
+        "..@@@@@@@@@@@@..",
+        "w.eeeeeeeeeeee.w",
+        "................"
+    ]
+}

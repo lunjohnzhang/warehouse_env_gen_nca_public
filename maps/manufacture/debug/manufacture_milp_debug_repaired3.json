@@ -1,0 +1,17 @@
+{
+    "name": "manufacture_milp_debug_repaired3",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "layout": [
+        "..e...e..e..e...",
+        ".e2eee0ee1ee1ee.",
+        ".eee0eee.e.eee2e",
+        "e1e.eee0eee0eee.",
+        ".ee.e2eee0eee2e.",
+        ".e2e.ee..ee..ee.",
+        ".ee.ee0eee2eee2e",
+        "e0ee1eee2eee0ee.",
+        ".e..e...e...e..."
+    ]
+}

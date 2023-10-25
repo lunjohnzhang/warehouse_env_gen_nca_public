@@ -1,0 +1,20 @@
+{
+    "name": "kiva_small_w_unrepaired",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "n_endpoint": 63,
+    "n_agent_loc": 63,
+    "maxtime": 5000,
+    "layout": [
+        "...eeeeeeeeeee..",
+        "w..e@@@@@@@@@@.w",
+        "..eeeeeeeeeeee..",
+        "..e@@@@@@@@@@@..",
+        "w.eeeeeeeeeeee.w",
+        "..e@e@@@@@@@@@..",
+        "..eeeeeeeeeee...",
+        "w.e@@@@@@@@@@@.w",
+        "..eeeeeeeeeeee.."
+    ]
+}

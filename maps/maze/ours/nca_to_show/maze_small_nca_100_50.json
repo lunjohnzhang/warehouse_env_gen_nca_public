@@ -1,0 +1,23 @@
+{
+    "name": "maze_small_nca_100_50",
+    "n_row": 16,
+    "n_col": 16,
+    "layout": [
+        "      XXX    XXX",
+        "  XX    XXX    X",
+        "   XXX    XXX   ",
+        "     XXX    XXX ",
+        " XX    XXX    XX",
+        "  XXX    XXX    ",
+        "    XXX    XXX  ",
+        " X    XXX    XXX",
+        "  XX    XXX    X",
+        "   XXX    XXX   ",
+        "     XXX    XXX ",
+        " XX    XXX    XX",
+        "  XXX    XXX    ",
+        "    XXX    XXX  ",
+        " X    XXX    XXX",
+        "  XX    XXX    X"
+    ]
+}

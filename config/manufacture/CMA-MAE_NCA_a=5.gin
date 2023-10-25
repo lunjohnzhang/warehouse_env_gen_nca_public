@@ -1,0 +1,138 @@
+# Macros:
+# ======================================================================================================================
+max_n_shelf = 1188
+measure_dim = 2
+min_n_shelf = 0
+num_objects = 5
+sigma0 = 0.2
+sol_size = 2693
+
+# Parameters for EvolutionStrategyEmitter:
+# ======================================================================================================================
+EvolutionStrategyEmitter.batch_size = 10
+EvolutionStrategyEmitter.es = 'cma_es'
+EvolutionStrategyEmitter.ranker = 'imp'
+EvolutionStrategyEmitter.restart_rule = 'no_improvement'
+EvolutionStrategyEmitter.selection_rule = 'mu'
+EvolutionStrategyEmitter.sigma0 = %sigma0
+
+# Parameters for experiment:
+# ======================================================================================================================
+experiment.name = 'Manufacture Generation CMA-MAE NCA'
+
+# Parameters for GridArchive:
+# ======================================================================================================================
+GridArchive.dims = [100, 100]
+GridArchive.learning_rate = 0.01
+GridArchive.ranges = [[0, 600], [0, 1]]
+GridArchive.solution_dim = %sol_size
+GridArchive.threshold_min = 0
+
+# Parameters for downsample/GridArchive:
+# ======================================================================================================================
+downsample/GridArchive.dims = [20, 20]
+downsample/GridArchive.ranges = [[0, 600], [0, 1]]
+downsample/GridArchive.solution_dim = %sol_size
+
+# Parameters for Manager:
+# ======================================================================================================================
+Manager.archive_save_freq = -1
+Manager.archive_type = @GridArchive
+Manager.emitter_types = [(@EvolutionStrategyEmitter, 5)]
+Manager.env_manager_class = @ManufactureManager
+Manager.initial_sols = 100
+Manager.inner_itrs = 10000
+Manager.is_cma_mae = True
+Manager.is_em = False
+Manager.max_evals = 10000
+Manager.plot_metrics_freq = 1
+Manager.reload_save_freq = 1
+Manager.sol_size = %sol_size
+
+# Parameters for ManufactureConfig:
+# ======================================================================================================================
+ManufactureConfig.CAT = False
+ManufactureConfig.aggregation_type = 'mean'
+ManufactureConfig.cutoffTime = 60
+ManufactureConfig.dummy_paths = False
+ManufactureConfig.hamming_obj_weight = 5
+ManufactureConfig.hamming_only = True
+ManufactureConfig.hold_endpoints = False
+ManufactureConfig.id = False
+ManufactureConfig.lazyP = False
+ManufactureConfig.log = False
+ManufactureConfig.measure_names = ['n_shelf', 'layout_entropy']
+ManufactureConfig.n_station_types = 3
+ManufactureConfig.obj_type = 'throughput_minus_hamming_dist'
+ManufactureConfig.planning_window = 10
+ManufactureConfig.potential_function = 'NONE'
+ManufactureConfig.potential_threshold = 0
+ManufactureConfig.prioritize_start = True
+ManufactureConfig.repair_n_threads = 1
+ManufactureConfig.repair_timelimit = 60
+ManufactureConfig.robust = 0
+ManufactureConfig.rotation = False
+ManufactureConfig.save_heuristics_table = False
+ManufactureConfig.save_result = False
+ManufactureConfig.save_solver = False
+ManufactureConfig.scenario = 'MANUFACTURE'
+ManufactureConfig.screen = 0
+ManufactureConfig.simulation_time = 1000
+ManufactureConfig.simulation_window = 5
+ManufactureConfig.single_agent_solver = 'SIPP'
+ManufactureConfig.solver = 'PBS'
+ManufactureConfig.station_same_weight = 5
+ManufactureConfig.station_wait_times = [2, 5, 10]
+ManufactureConfig.stop_at_traffic_jam = True
+ManufactureConfig.suboptimal_bound = 1
+ManufactureConfig.task = ''
+ManufactureConfig.test = False
+ManufactureConfig.travel_time_window = 0
+ManufactureConfig.use_warm_up = True
+
+# Parameters for ManufactureConvolutional:
+# ======================================================================================================================
+ManufactureConvolutional.head_dimensions = [1, 1, 1]
+ManufactureConvolutional.i_size = 32
+ManufactureConvolutional.n_extra_layers = 0
+ManufactureConvolutional.nc = 5
+ManufactureConvolutional.ndf = 64
+
+# Parameters for ManufactureEmulationModel:
+# ======================================================================================================================
+ManufactureEmulationModel.network_type = @ManufactureConvolutional
+ManufactureEmulationModel.prediction_type = 'regression'
+ManufactureEmulationModel.train_batch_size = 64
+ManufactureEmulationModel.train_epochs = 20
+ManufactureEmulationModel.train_sample_size = 20000
+
+# Parameters for ManufactureManager:
+# ======================================================================================================================
+ManufactureManager.agent_num = 200
+ManufactureManager.is_nca = True
+ManufactureManager.lvl_height = 33
+ManufactureManager.lvl_width = 36
+ManufactureManager.max_n_shelf = %max_n_shelf
+ManufactureManager.min_n_shelf = %min_n_shelf
+ManufactureManager.n_endpt = 2
+ManufactureManager.n_evals = 5
+ManufactureManager.nca_iter = 50
+ManufactureManager.num_objects = %num_objects
+ManufactureManager.seed_env_path = 'maps/manufacture/nca/manufacture_large_seed_block.json'
+
+# Parameters for ManufactureNCA:
+# ======================================================================================================================
+ManufactureNCA.kernel_size = 3
+ManufactureNCA.n_aux_chan = 0
+ManufactureNCA.n_hid_chan = 32
+ManufactureNCA.nc = 5
+
+# Parameters for MapElitesBaselineManufactureEmitter:
+# ======================================================================================================================
+MapElitesBaselineManufactureEmitter.batch_size = 10
+MapElitesBaselineManufactureEmitter.geometric_k = True
+MapElitesBaselineManufactureEmitter.initial_population = 20
+MapElitesBaselineManufactureEmitter.max_n_shelf = %max_n_shelf
+MapElitesBaselineManufactureEmitter.min_n_shelf = %min_n_shelf
+MapElitesBaselineManufactureEmitter.mutation_k = 10
+MapElitesBaselineManufactureEmitter.num_objects = %num_objects

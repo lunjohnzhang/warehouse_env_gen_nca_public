@@ -1,0 +1,17 @@
+{
+    "name": "construction_small_2x2",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "layout": [
+        ".........00000..",
+        "..eeeee..eeeee..",
+        "..11111..11111..",
+        "..eeeee..eeeee..",
+        "................",
+        "..eeeee..eeeee..",
+        "..22222..00000..",
+        "..eeeee..eeeee..",
+        ".........22222.."
+    ]
+}

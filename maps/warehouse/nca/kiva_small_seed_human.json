@@ -1,0 +1,20 @@
+{
+    "name": "kiva_small_seed_human",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "n_endpoint": 40,
+    "n_agent_loc": 40,
+    "maxtime": 5000,
+    "layout": [
+        "............",
+        "eeeee..eeeee",
+        "@@@@@..@@@@@",
+        "eeeee..eeeee",
+        "............",
+        "eeeee..eeeee",
+        "@@@@@..@@@@@",
+        "eeeee..eeeee",
+        "............"
+    ]
+}

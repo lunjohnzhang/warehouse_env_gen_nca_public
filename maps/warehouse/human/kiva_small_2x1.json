@@ -1,0 +1,20 @@
+{
+    "name": "kiva_small_2x1",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 20,
+    "n_endpoint": 28,
+    "n_agent_loc": 24,
+    "maxtime": 5000,
+    "layout": [
+        "..................",
+        ".rr.e@@e..e@@e.rr.",
+        ".rr.e@@e..e@@e.rr.",
+        ".rr.e@@e..e@@e.rr.",
+        "....e@@e..e@@e....",
+        ".rr.e@@e..e@@e.rr.",
+        ".rr.e@@e..e@@e.rr.",
+        ".rr.e@@e..e@@e.rr.",
+        ".................."
+    ]
+}

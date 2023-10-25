@@ -1,0 +1,33 @@
+{
+    "name": "kiva_mid_cma-mae_entropy_throughput_hamming_a=8_s_train_mid",
+    "layout": [
+        "..@@@@@@@@@@@...",
+        "w.eeeeeeeeeee..w",
+        "................",
+        "..e@ee@e.e@e....",
+        "w..............w",
+        "..e@e.e@e..e@e..",
+        "................",
+        "w...e@e....e@e.w",
+        "................",
+        "..e@ee@ee@ee@e..",
+        "w..............w",
+        "..e@ee@ee@ee@e..",
+        "................",
+        "w.e@e...e@e....w",
+        "................",
+        "..eeeeeeeeeee...",
+        "..@@@@@@@@@@@e.."
+    ],
+    "nca_runtime": null,
+    "milp_runtime": null,
+    "nca_milp_runtime": null,
+    "sim_score": null,
+    "weight": false,
+    "n_row": 17,
+    "n_col": 16,
+    "n_endpoint": 59,
+    "n_agent_loc": 0,
+    "n_shelf": 40,
+    "maxtime": 5000
+}

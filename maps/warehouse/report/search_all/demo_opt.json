@@ -1,0 +1,20 @@
+{
+    "name": "kiva_search_all_tiles_repaired",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "n_endpoint": 35,
+    "n_agent_loc": 35,
+    "maxtime": 5000,
+    "layout": [
+        "....e@.....e@e..",
+        "w....ee.e......w",
+        "..ee..@e@.e.@e..",
+        "..@@..e...@ee@..",
+        "w.ee.e@e@.e....w",
+        "...@.e@ee.@e@e..",
+        "..ee.ee....ee...",
+        "w.@..@e@e..@@..w",
+        "..e........ee..."
+    ]
+}

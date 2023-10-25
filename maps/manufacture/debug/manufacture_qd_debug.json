@@ -1,0 +1,17 @@
+{
+    "name": "manufacture_qd_debug",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "layout": [
+        "e0e........ee0ee",
+        "ee.....00.e0eee2",
+        "0e...e.ee..e...e",
+        "e.eee0e........e",
+        "0e00ee..ee....e0",
+        "e......e000eee1e",
+        ".e........e.0ee.",
+        "e0e........ee...",
+        "..........e0ee0e"
+    ]
+}

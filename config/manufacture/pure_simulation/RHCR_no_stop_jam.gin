@@ -1,0 +1,3 @@
+include "config/manufacture/pure_simulation/RHCR.gin"
+
+ManufactureConfig.stop_at_traffic_jam=False

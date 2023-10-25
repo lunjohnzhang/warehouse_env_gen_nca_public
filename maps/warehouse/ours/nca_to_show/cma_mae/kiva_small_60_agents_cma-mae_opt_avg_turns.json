@@ -1,0 +1,20 @@
+{
+    "name": "kiva_small_60_agents_cma-mae_opt_avg_turns",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "n_endpoint": 53,
+    "n_agent_loc": 0,
+    "maxtime": 5000,
+    "layout": [
+        "....ee.e@eeee...",
+        "w..e@@..ee@@@..w",
+        "..e.eeeee.eee...",
+        "..@.ee@@@..e....",
+        "w.ee@eeee.e@e..w",
+        "....e.....ee....",
+        "..e...eeee@eee..",
+        "w.@.ee@@@.ee@@.w",
+        "..ee@eeee...ee.."
+    ]
+}

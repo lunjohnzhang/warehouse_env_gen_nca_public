@@ -1,0 +1,28 @@
+{
+    "name": "kiva_work_die_debug",
+    "weight": false,
+    "n_row": 17,
+    "n_col": 16,
+    "n_endpoint": 75,
+    "n_agent_loc": 0,
+    "maxtime": 5000,
+    "layout": [
+        "..ee....ee@e@e..",
+        "w.@@e.ee@e..e@.w",
+        "..e...@e@e@e....",
+        "..e@e.e.e@e.e...",
+        "w.@@e..e.e@e@..w",
+        "..ee...@e@e.....",
+        "..e....e..@e@e..",
+        "w.@......ee.e@.w",
+        "..e.@e..e@e@.e..",
+        "....e..e.@eee@..",
+        "w......@ee..e@.w",
+        ".....e....ee.e..",
+        "....e@...e@@e...",
+        "w...e..e.ee....w",
+        "...e@ee@.@.@ee..",
+        "..e.e@.@ee@e.@..",
+        "..@e.e.e..e..e.."
+    ]
+}

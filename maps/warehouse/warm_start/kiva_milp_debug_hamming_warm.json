@@ -1,0 +1,20 @@
+{
+    "name": "kiva_milp_debug_hamming_warm",
+    "weight": false,
+    "n_row": 33,
+    "n_col": 46,
+    "n_endpoint": 480,
+    "n_agent_loc": 192,
+    "maxtime": 5000,
+    "layout": [
+        "......@e...e@@e.....",
+        ".ww.........@e...ww.",
+        ".ww..ee..e..ee.e.ww.",
+        ".ww.e@@e.@e..@e@.ww.",
+        "....e@@e.@e...e@....",
+        ".ww..eee.e..e..e.ww.",
+        ".ww....@ee..@ee..ww.",
+        ".ww.e..e@@e...@e.ww.",
+        "....@e.@e..........."
+    ]
+}

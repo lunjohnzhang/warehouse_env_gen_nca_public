@@ -1,0 +1,23 @@
+{
+    "name": "maze_example",
+    "n_row": 16,
+    "n_col": 16,
+    "layout": [
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "                ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            ",
+        "  XX            "
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "name": "kiva_mid_90_agents_cma-me_opt",
+    "weight": false,
+    "n_row": 17,
+    "n_col": 16,
+    "n_endpoint": 72,
+    "n_agent_loc": 0,
+    "maxtime": 5000,
+    "layout": [
+        "...e@e@e@e@e@e..",
+        "w..e.e.e.e.e.e.w",
+        "...@.@.@.@.@.@..",
+        "...e.e.e.e.e.e..",
+        "w..e.e.e.e.e.e.w",
+        "...@.@.@.@.@.@..",
+        "...e.e.e.e.e.e..",
+        "w..e.e.e.e.e.e.w",
+        "...@.@.@.@.@.@..",
+        "...e.e.e.e.e.e..",
+        "w..e.e.e.e.e.e.w",
+        "...@.@.@.@.@.@..",
+        "...e.e.e.e.e.e..",
+        "w..e.e.e.e.e.e.w",
+        "...@.@.@.@.@.@..",
+        "...e.e.e.e.e.e..",
+        "...e@e@e@e@e@e.."
+    ]
+}

@@ -1,0 +1,22 @@
+
+
+{
+    "name": "test_run",
+    "weight": false,
+    "n_row": 33,
+    "n_col": 46,
+    "n_endpoint": 480,
+    "n_agent_loc": 192,
+    "maxtime": 5000,
+    "layout": [
+        "..........e@ee@e....",
+        ".rr...........e@.rr.",
+        ".rr...........e@.rr.",
+        ".rr...........e@.rr.",
+        "..........e@e.@e....",
+        ".rr.......e@e.@e.rr.",
+        ".rr.....e@e.ee@e.rr.",
+        ".rr.@e..e@e.@e@e.rr.",
+        "....e.........e@...."
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "name": "manufacture_milp_debug3",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "layout": [
+        "eeeeeeeeeeeeeeee",
+        "eeeeeeeeeeeeeeee",
+        "eeeeeeeeeeeeeeee",
+        "eeeeeeeeeeeeeeee",
+        "eeeeeeeeeeeeeeee",
+        "eeeeeeeeeeeeeeee",
+        "eeeeeeeeeeeeeeee",
+        "eeeeeeeeeeeeeeee",
+        "eeeeeeeeeeeeeeee"
+    ]
+}

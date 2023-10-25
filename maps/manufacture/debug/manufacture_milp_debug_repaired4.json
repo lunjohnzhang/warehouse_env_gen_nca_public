@@ -1,0 +1,17 @@
+{
+    "name": "manufacture_milp_debug_repaired4",
+    "weight": false,
+    "n_row": 9,
+    "n_col": 16,
+    "layout": [
+        "..e.......e...e.",
+        ".e1e.....e1e.e1e",
+        "..e.......e.e2e.",
+        ".e0eee.......e..",
+        "e1ee11e.e...e1e.",
+        "e2e22e2e2ee..e2e",
+        ".ee0e.eeee0e.ee.",
+        "...e..e1e.e1e1e.",
+        ".......e...e.e.."
+    ]
+}

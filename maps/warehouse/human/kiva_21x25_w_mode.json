@@ -1,0 +1,32 @@
+{
+    "name": "kiva_21x25_w_mode",
+    "weight": false,
+    "n_row": 21,
+    "n_col": 25,
+    "n_endpoint": 480,
+    "n_agent_loc": 0,
+    "maxtime": 2000,
+    "layout": [
+        ".........................",
+        "w.eeeeeeeeee.eeeeeeeeee.w",
+        "..@@@@@@@@@@.@@@@@@@@@@..",
+        "..eeeeeeeeee.eeeeeeeeee..",
+        "w.......................w",
+        "..eeeeeeeeee.eeeeeeeeee..",
+        "..@@@@@@@@@@.@@@@@@@@@@..",
+        "w.eeeeeeeeee.eeeeeeeeee.w",
+        ".........................",
+        "..eeeeeeeeee.eeeeeeeeee..",
+        "w.@@@@@@@@@@.@@@@@@@@@@.w",
+        "..eeeeeeeeee.eeeeeeeeee..",
+        ".........................",
+        "w.eeeeeeeeee.eeeeeeeeee.w",
+        "..@@@@@@@@@@.@@@@@@@@@@..",
+        "..eeeeeeeeee.eeeeeeeeee..",
+        "w.......................w",
+        "..eeeeeeeeee.eeeeeeeeee..",
+        "..@@@@@@@@@@.@@@@@@@@@@..",
+        "w.eeeeeeeeee.eeeeeeeeee.w",
+        "........................."
+    ]
+}

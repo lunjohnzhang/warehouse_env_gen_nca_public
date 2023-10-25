@@ -1,0 +1,48 @@
+# ## ManufactureConfig ##
+ManufactureConfig.scenario="MANUFACTURE"      # scenario (SORTING, KIVA,
+                                              # ONLINE, BEE, MANUFACTURE)
+ManufactureConfig.task=""                     # input task file
+ManufactureConfig.cutoffTime=60               # cutoff time (seconds)
+ManufactureConfig.screen=0                    # screen option (0: none; 1:
+                                              # results; 2:all)
+ManufactureConfig.solver="PBS"                # solver (LRA, PBS, WHCA, ECBS)
+ManufactureConfig.id=False                    # independence detection
+ManufactureConfig.single_agent_solver="SIPP"  # single-agent solver (ASTAR,
+                                              # SIPP)
+ManufactureConfig.lazyP=False                 # use lazy priority
+ManufactureConfig.simulation_time=5000        # run simulation
+ManufactureConfig.simulation_window=5         # (h) call the planner every
+                                              # simulation_window timesteps
+ManufactureConfig.travel_time_window=0        # consider the traffic jams within
+                                              # the given window
+ManufactureConfig.planning_window=10          # (w) the planner outputs plans
+                                              # with first planning_window
+                                              # timesteps collision-free
+ManufactureConfig.potential_function="NONE"   # potential function (NONE, SOC,
+                                              # IC)
+ManufactureConfig.potential_threshold=0       # potential threshold
+ManufactureConfig.rotation=False              # consider rotation
+ManufactureConfig.robust=0                    # k-robust (for now, only work for
+                                              # PBS)
+ManufactureConfig.CAT=False                   # use conflict-avoidance table
+ManufactureConfig.hold_endpoints=False        # Hold endpoints from Ma et al,
+                                              # AAMAS 2017
+ManufactureConfig.dummy_paths=False           # Find dummy paths from Liu et al,
+                                              # AAMAS 2019
+ManufactureConfig.prioritize_start=True       # Prioritize waiting at start
+                                              # locations
+ManufactureConfig.suboptimal_bound=1          # Suboptimal bound for ECBS
+ManufactureConfig.log=False                   # save the search trees (and the
+                                              # priority trees)
+ManufactureConfig.aggregation_type = "mean"
+ManufactureConfig.measure_names = ["n_shelf_components", "layout_entropy"]
+ManufactureConfig.test=False
+ManufactureConfig.use_warm_up=True
+ManufactureConfig.hamming_only=False
+ManufactureConfig.save_result=False
+ManufactureConfig.save_solver=False
+ManufactureConfig.save_heuristics_table=False
+ManufactureConfig.stop_at_traffic_jam=True
+ManufactureConfig.obj_type = "throughput"
+ManufactureConfig.n_station_types=3
+ManufactureConfig.station_wait_times=[2,5,10]
