@@ -56,7 +56,7 @@ If you are in mainland China, please use the corresponding `build_container_cn.s
    container creation failed: mount /proc/self/fd/3->/usr/local/var/singularity/mnt/session/rootfs error: while mounting image`/proc/self/fd/3: failed to find loop device: no loop devices available
    ```
 
-Please try downgrading/upgrading the Linux kernel version to `5.15.0-67-generic`, as suggested in [this Github issue](https://github.com/sylabs/singularity/issues/1499).
+   Please try downgrading/upgrading the Linux kernel version to `5.15.0-67-generic`, as suggested in [this Github issue](https://github.com/sylabs/singularity/issues/1499).
 
 ## Optimizing Environments
 
