@@ -1,6 +1,6 @@
 # Style for heatmaps.
 
-font.family: Times New Roman
+font.family: DejaVu Sans
 mathtext.fontset: cm
 
 axes.facecolor: white

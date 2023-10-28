@@ -1,7 +1,7 @@
 # Style for archive visualizations. See
 # https://matplotlib.org/stable/tutorials/introductory/customizing.html
 
-font.family: Times New Roman
+font.family: DejaVu Sans
 
 # Font sizes.
 font.size: 9.0

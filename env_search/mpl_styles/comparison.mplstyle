@@ -1,7 +1,7 @@
 # Simple stylesheet for Matplotlib. Adapted from clean.mplstyle
 # (https://github.com/nicoguaro/matplotlib_styles/blob/master/styles/clean.mplstyle)
 
-font.family: Times New Roman
+font.family: DejaVu Sans
 font.size: 16
 mathtext.fontset: cm
 
