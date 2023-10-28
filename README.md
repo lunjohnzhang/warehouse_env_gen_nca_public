@@ -240,7 +240,7 @@ bash scripts/run_single_sim.sh SIM_CONFIG MAP_FILE AGENT_NUM AGENT_NUM_STEP_SIZE
 
 There are two modes associated with the `MODE` parameter, namely `inc_agents` and `constant`.
 
-With `inc_agents` mode, the script will run simulations on the provided environment with an increment number of agents. Specifically, starting with `AGENT_NUM`, it increment the number by step size of `AGENT_NUM_STEP_SIZE`, until the number of agents reaches `AGENT_NUM + N_EVALS`. For each number of agents, it runs the simulations `N_SIM` times with seeds from `0` to `N_SIM - 1`. All simulations run in parallel on `N_WORKERS` processes.
+**`inc_agents` mode:** the script will run simulations on the provided environment with an increment number of agents. Specifically, starting with `AGENT_NUM`, it increment the number by step size of `AGENT_NUM_STEP_SIZE`, until the number of agents reaches `AGENT_NUM + N_EVALS`. For each number of agents, it runs the simulations `N_SIM` times with seeds from `0` to `N_SIM - 1`. All simulations run in parallel on `N_WORKERS` processes.
 
 For example, the following command:
 
@@ -252,7 +252,7 @@ bash scripts/run_single_sim.sh config/warehouse/pure_simulation/RHCR.gin \
 
 runs 50 simulations with 50 to 351 agents, increment in step size of 10, in the environment `maps/warehouse/human/kiva_large_w_mode.json` with simulation config `config/warehouse/pure_simulation/RHCR.gin` in the warehouse domain.
 
-With `constant` mode, the script will run simulations on the provided environment with a fixed number of agents with random seeds. Specifically, it runs `N_EVALS` simulations with `AGENT_NUM` agents, in parallel on `N_WORKERS` processes. Other parameters will be ignored but they must be given some dummy values for the script to pick up the correct parameter.
+**`constant` mode**: the script will run simulations on the provided environment with a fixed number of agents with random seeds. Specifically, it runs `N_EVALS` simulations with `AGENT_NUM` agents, in parallel on `N_WORKERS` processes. Other parameters will be ignored but they must be given some dummy values for the script to pick up the correct parameter.
 
 For example, the following command:
 
