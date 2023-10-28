@@ -16,8 +16,7 @@ This is a hybrid C++/Python project. The simulation environment is written in C+
 1. **Install Singularity:** All of our code runs in a Singularity container.
    Singularity is a container platform (similar in many ways to Docker). Please
    see the instructions
-   [here](https://sylabs.io/guides/3.6/user-guide/quick_start.html) for
-   installing Singularity 3.6.
+   [here](https://sylabs.io/singularity/) for installing SingularityCE. As a reference, we use version 3.11.1.
 
 1. **Download Boost:** From the root directory of the project, run the following to download the Boost 1.71, which is required for compiling C++ simulator. You don't have to install it on your system since it will be passed into the container and installed there.
 
