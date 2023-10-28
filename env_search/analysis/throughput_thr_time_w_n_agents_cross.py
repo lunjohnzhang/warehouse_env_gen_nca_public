@@ -25,13 +25,13 @@ def throughput_thr_time_w_n_agents_cross(
     throughput_thr_time_cross(
         all_thr_time_logdirs_plot,
         ax=ax_thr_time,
-        add_legend=False,
+        add_legend=True,
         save_fig=False,
     )
     throughput_vs_n_agents_cross(
         all_n_agents_logdirs_plot,
         ax=ax_n_agents,
-        add_legend=False,
+        add_legend=True,
         save_fig=False,
     )
 

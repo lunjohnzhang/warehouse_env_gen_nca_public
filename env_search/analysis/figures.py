@@ -469,8 +469,8 @@ def comparison(
                     x_interpolate = np.array(evals)[x_data]
                     f = interp1d(x_interpolate, entry_metrics[metric])
                     total_evals = evals[-1]
-                    xnew = list(range(not_use_zero, total_evals + 1,
-                                      plot_every))
+                    xnew = list(
+                        range(not_use_zero, total_evals + 1, plot_every))
                     if xnew[-1] != total_evals:
                         # Make sure last x is included.
                         xnew.append(total_evals)
@@ -497,189 +497,185 @@ def comparison(
             plot_data[d] = np.concatenate(plot_data[d])[::-1]
 
         logger.info("Generating Plot for {}", env)
-        for sans in [True, False]:
-            with mpl_style_file("comparison_sans.mplstyle" if sans else
-                                "comparison.mplstyle") as f, plt.style.context(
-                                    f):
-                if palette_name == "qualitative_colors":
-                    colors = QUALITATIVE_COLORS
-                elif palette_name == "colorblind_reordered":
-                    # Rearrange the color-blind template.
-                    colors = COLORBLIND_REORDERED
-                else:
-                    colors = sns.color_palette(palette_name)
+        with mpl_style_file("comparison.mplstyle") as f, plt.style.context(f):
+            if palette_name == "qualitative_colors":
+                colors = QUALITATIVE_COLORS
+            elif palette_name == "colorblind_reordered":
+                # Rearrange the color-blind template.
+                colors = COLORBLIND_REORDERED
+            else:
+                colors = sns.color_palette(palette_name)
 
-                palette = dict(zip(all_algos, colors))
-                markers = dict(zip(all_algos, itertools.cycle("ovD^XP")))
+            palette = dict(zip(all_algos, colors))
+            markers = dict(zip(all_algos, itertools.cycle("ovD^XP")))
 
-                # This takes a while since it has to generate the
-                # bootstrapped confidence intervals.
-                grid = sns.relplot(
-                    data=plot_data,
-                    x="Evaluations",
-                    y="Score",
-                    hue="Algorithm",
-                    style="Algorithm",
-                    col="Metric",
-                    row="Environment",
-                    kind="line",
-                    errorbar="se",
-                    markers=markers,
-                    markevery=(0.3, 0.4),
-                    markersize=10,
-                    dashes=False,
-                    height=height,
-                    aspect=1.3,
-                    facet_kws={"sharey": False},
-                    palette=palette,
-                    legend=False,
-                )
+            # This takes a while since it has to generate the
+            # bootstrapped confidence intervals.
+            grid = sns.relplot(
+                data=plot_data,
+                x="Evaluations",
+                y="Score",
+                hue="Algorithm",
+                style="Algorithm",
+                col="Metric",
+                row="Environment",
+                kind="line",
+                errorbar=("ci", 95),
+                markers=markers,
+                markevery=(0.3, 0.4),
+                markersize=10,
+                dashes=False,
+                height=height,
+                aspect=1.3,
+                facet_kws={"sharey": False},
+                palette=palette,
+                legend=False,
+            )
 
-                #  grid.fig.suptitle(env, x=0.5)
+            #  grid.fig.suptitle(env, x=0.5)
 
-                #  # Set titles to be the env name.
-                #  grid.set_titles("{col_name}")
-                grid.set_titles("")
+            #  # Set titles to be the env name.
+            #  grid.set_titles("{col_name}")
+            grid.set_titles("")
 
-                #  # Turn off titles below top row (no need to repeat).
-                #  for ax in grid.axes[1:].ravel():
-                #      ax.set_title("")
+            #  # Turn off titles below top row (no need to repeat).
+            #  for ax in grid.axes[1:].ravel():
+            #      ax.set_title("")
 
-                left_col = list(figure_data)[0]
-                for (row_val, col_val), ax in grid.axes_dict.items():
-                    # Move the ticks and grid lines below the plotted lines.
-                    ax.set_axisbelow(True)
+            left_col = list(figure_data)[0]
+            for (row_val, col_val), ax in grid.axes_dict.items():
+                # Move the ticks and grid lines below the plotted lines.
+                ax.set_axisbelow(True)
 
-                    # Set titles to be the name of the metric.
-                    ax.set_title(col_val)
+                # Set titles to be the name of the metric.
+                ax.set_title(col_val)
 
-                    # Set what numbering is used for ticks.
-                    #  ax.ticklabel_format(scilimits=[-3, 3])
+                # Set what numbering is used for ticks.
+                #  ax.ticklabel_format(scilimits=[-3, 3])
 
-                    # Turn off both labels.
-                    # ax.set_xlabel("")
-                    ax.set_ylabel("")
+                # Turn off both labels.
+                # ax.set_xlabel("")
+                ax.set_ylabel("")
 
-                    if "Maze" in env:
-                        ax.set_xticks([0, 50000, 100000])
-                        ax.set_xticklabels([0, "50k", "100k"])
-                        ax.set_xlim(0, 100000)
-                        if col_val == "QD-score":
-                            if env == "Maze_compare_QD-score_entropy":
-                                ax.set_yticks([0, 7500, 15000])
-                                ax.set_ylim(0, 15000)
-                                ax.set_yticklabels([0, "10k", "20k"])
-                            elif env == "Maze_compare_QD-score":
-                                ax.set_yticks([0, 10000, 20000])
-                                ax.set_yticklabels([0, "10k", "20k"])
+                if "Maze" in env:
+                    ax.set_xticks([0, 50000, 100000])
+                    ax.set_xticklabels([0, "50k", "100k"])
+                    ax.set_xlim(0, 100000)
+                    if col_val == "QD-score":
+                        if env == "Maze_compare_QD-score_entropy":
+                            ax.set_yticks([0, 7500, 15000])
+                            ax.set_ylim(0, 15000)
+                            ax.set_yticklabels([0, "10k", "20k"])
+                        elif env == "Maze_compare_QD-score":
+                            ax.set_yticks([0, 10000, 20000])
+                            ax.set_yticklabels([0, "10k", "20k"])
+                        # ax.set_ylim(0, 20000)
+                    elif col_val == "Archive Coverage":
+                        if env == "Maze_compare_QD-score_entropy":
+                            ax.set_yticks([0, 0.4, 0.8])
+                            ax.set_ylim(0, 0.8)
+                        elif env == "Maze_compare_QD-score":
+                            ax.set_yticks([0, 0.3, 0.6])
+                            ax.set_ylim(0, 0.6)
+                elif "Kiva" in env:
+                    ax.set_xticks([0, 5000, 10000])
+                    ax.set_xticklabels([0, "5k", "10k"])
+                    ax.set_xlim(0, 10000)
+                    if col_val == "QD-score":
+                        if env == "Kiva_w_mode_small":
+                            ax.set_yticks([0, 500, 1000])
+                            ax.set_yticklabels([0, "0.5k", "1k"])
+                            ax.set_ylim(0, 1000)
+                        elif env == "Kiva_w_mode_mid":
+                            ax.set_yticks([0, 2000, 4000])
+                            ax.set_yticklabels([0, "2k", "4k"])
+                            ax.set_ylim(0, 4000)
+                        elif env == "Kiva_w_mode_large":
+                            ax.set_yticks([0, 4000, 8000])
+                            ax.set_yticklabels([0, "4k", "8k"])
+                            ax.set_ylim(0, 8000)
+                        elif env == "Kiva_r_mode_small" or env == "Kiva_r_mode_small_agents":
+                            ax.set_yticks([0, 2000, 4000])
+                            ax.set_yticklabels([0, "2k", "4k"])
+                            ax.set_ylim(0, 4000)
+                        elif env == "Kiva_compare_obj" or env == "Kiva_compare_obj_uneven_w":
+                            ax.set_yticks([0, 15000, 30000])
+                            ax.set_yticklabels([0, "15k", "30k"])
+                            ax.set_ylim(0, 30000)
+                        elif env == "Kiva_compare_QD-score":
+                            ax.set_yticks([0, 10000, 20000])
+                            ax.set_yticklabels([0, "10k", "20k"])
                             # ax.set_ylim(0, 20000)
-                        elif col_val == "Archive Coverage":
-                            if env == "Maze_compare_QD-score_entropy":
-                                ax.set_yticks([0, 0.4, 0.8])
-                                ax.set_ylim(0, 0.8)
-                            elif env == "Maze_compare_QD-score":
-                                ax.set_yticks([0, 0.3, 0.6])
-                                ax.set_ylim(0, 0.6)
-                    elif "Kiva" in env:
-                        ax.set_xticks([0, 5000, 10000])
-                        ax.set_xticklabels([0, "5k", "10k"])
-                        ax.set_xlim(0, 10000)
-                        if col_val == "QD-score":
-                            if env == "Kiva_w_mode_small":
-                                ax.set_yticks([0, 500, 1000])
-                                ax.set_yticklabels([0, "0.5k", "1k"])
-                                ax.set_ylim(0, 1000)
-                            elif env == "Kiva_w_mode_mid":
-                                ax.set_yticks([0, 2000, 4000])
-                                ax.set_yticklabels([0, "2k", "4k"])
-                                ax.set_ylim(0, 4000)
-                            elif env == "Kiva_w_mode_large":
-                                ax.set_yticks([0, 4000, 8000])
-                                ax.set_yticklabels([0, "4k", "8k"])
-                                ax.set_ylim(0, 8000)
-                            elif env == "Kiva_r_mode_small" or env == "Kiva_r_mode_small_agents":
-                                ax.set_yticks([0, 2000, 4000])
-                                ax.set_yticklabels([0, "2k", "4k"])
-                                ax.set_ylim(0, 4000)
-                            elif env == "Kiva_compare_obj" or env == "Kiva_compare_obj_uneven_w":
-                                ax.set_yticks([0, 15000, 30000])
-                                ax.set_yticklabels([0, "15k", "30k"])
-                                ax.set_ylim(0, 30000)
-                            elif env == "Kiva_compare_QD-score":
-                                ax.set_yticks([0, 10000, 20000])
-                                ax.set_yticklabels([0, "10k", "20k"])
-                                # ax.set_ylim(0, 20000)
-                            elif env == "Kiva_uneven_compare_QD-score":
-                                ax.set_yticks([0, 10000, 20000])
-                                ax.set_yticklabels([0, "10k", "20k"])
+                        elif env == "Kiva_uneven_compare_QD-score":
+                            ax.set_yticks([0, 10000, 20000])
+                            ax.set_yticklabels([0, "10k", "20k"])
 
-                        elif col_val == "Archive Coverage":
-                            ax.set_yticks([0, 0.15, 0.3])
-                            ax.set_ylim(0, 0.3)
-                            if env == "Kiva_w_mode_small":
-                                ax.set_yticks([0, 0.2, 0.4])
-                                ax.set_ylim(0, 0.4)
-                            elif env == "Kiva_w_mode_large":
-                                ax.set_yticks([0, 0.1, 0.2])
-                                ax.set_ylim(0, 0.2)
-                            elif env == "Kiva_r_mode_small" or env == "Kiva_r_mode_small_agents":
-                                ax.set_yticks([0, 0.3, 0.6])
-                                ax.set_ylim(0, 0.6)
-                            elif env == "Kiva_compare_obj" or env == "Kiva_compare_obj_uneven_w":
-                                ax.set_yticks([0, 0.2, 0.4])
-                                ax.set_ylim(0, 0.4)
-                            elif env == "Kiva_compare_QD-score":
-                                ax.set_yticks([0, 0.2, 0.4])
-                                ax.set_ylim(0, 0.4)
-                            elif env == "Kiva_uneven_compare_QD-score":
-                                ax.set_yticks([0, 0.2, 0.4])
-                                ax.set_ylim(0, 0.4)
-                    elif "Manufacture" in env:
-                        ax.set_xticks([0, 5000, 10000])
-                        ax.set_xticklabels([0, "5k", "10k"])
-                        ax.set_xlim(0, 10000)
-                        if col_val == "QD-score":
-                            if env == "Manufacture_compare_QD-score":
-                                ax.set_yticks([0, 4000, 8000])
-                                ax.set_yticklabels([0, "4k", "8k"])
-                                ax.set_ylim(0, 8000)
-                        elif col_val == "Archive Coverage":
-                            if env == "Manufacture_compare_QD-score":
-                                ax.set_yticks([0, 0.1, 0.2])
-                                ax.set_ylim(0, 0.2)
-                    # Currently only plotting single column, so no need to check
-                    # this.
-                    #  if col_val == left_col:
-                    #      ax.set_ylabel(row_val, labelpad=10.0)
+                    elif col_val == "Archive Coverage":
+                        ax.set_yticks([0, 0.15, 0.3])
+                        ax.set_ylim(0, 0.3)
+                        if env == "Kiva_w_mode_small":
+                            ax.set_yticks([0, 0.2, 0.4])
+                            ax.set_ylim(0, 0.4)
+                        elif env == "Kiva_w_mode_large":
+                            ax.set_yticks([0, 0.1, 0.2])
+                            ax.set_ylim(0, 0.2)
+                        elif env == "Kiva_r_mode_small" or env == "Kiva_r_mode_small_agents":
+                            ax.set_yticks([0, 0.3, 0.6])
+                            ax.set_ylim(0, 0.6)
+                        elif env == "Kiva_compare_obj" or env == "Kiva_compare_obj_uneven_w":
+                            ax.set_yticks([0, 0.2, 0.4])
+                            ax.set_ylim(0, 0.4)
+                        elif env == "Kiva_compare_QD-score":
+                            ax.set_yticks([0, 0.2, 0.4])
+                            ax.set_ylim(0, 0.4)
+                        elif env == "Kiva_uneven_compare_QD-score":
+                            ax.set_yticks([0, 0.2, 0.4])
+                            ax.set_ylim(0, 0.4)
+                elif "Manufacture" in env:
+                    ax.set_xticks([0, 5000, 10000])
+                    ax.set_xticklabels([0, "5k", "10k"])
+                    ax.set_xlim(0, 10000)
+                    if col_val == "QD-score":
+                        if env == "Manufacture_compare_QD-score":
+                            ax.set_yticks([0, 4000, 8000])
+                            ax.set_yticklabels([0, "4k", "8k"])
+                            ax.set_ylim(0, 8000)
+                    elif col_val == "Archive Coverage":
+                        if env == "Manufacture_compare_QD-score":
+                            ax.set_yticks([0, 0.12, 0.24])
+                            ax.set_ylim(0, 0.24)
+                # Currently only plotting single column, so no need to check
+                # this.
+                #  if col_val == left_col:
+                #      ax.set_ylabel(row_val, labelpad=10.0)
 
-                # Add legend and resize figure to fit it.
-                grid.fig.legend(
-                    *legend_info(all_algos, palette, markers),
-                    bbox_to_anchor=[0.5, 1.0],
-                    loc="upper center",
-                    # ncol=(len(palette) + 1) // 2,
-                    ncol=3,
-                    # Slightly smaller than the main font size.
-                    fontsize=14.5,
-                    # Smaller than default of 2.0 to keep legend columns close.
-                    columnspacing=1.0,
-                    # Padding between handle icon and text.
-                    handletextpad=0.4,
+            # Add legend and resize figure to fit it.
+            grid.fig.legend(
+                *legend_info(all_algos, palette, markers),
+                bbox_to_anchor=[0.5, 1.0],
+                loc="upper center",
+                # ncol=(len(palette) + 1) // 2,
+                ncol=3,
+                # Slightly smaller than the main font size.
+                fontsize=14.5,
+                # Smaller than default of 2.0 to keep legend columns close.
+                columnspacing=1.0,
+                # Padding between handle icon and text.
+                handletextpad=0.4,
+            )
+            fig_width, fig_height = grid.fig.get_size_inches()
+            legend_height = 0.6
+            grid.fig.set_size_inches(fig_width, fig_height + legend_height)
+            grid.fig.tight_layout()
+            # Save the figure.
+            grid.fig.tight_layout(rect=(0, 0, 1, fig_height /
+                                        (fig_height + legend_height)))
+            for extension in ["pdf", "png", "svg"]:
+                grid.fig.savefig(
+                    output / f"{slugify.slugify(env)}.{extension}",
+                    dpi=300,
+                    bbox_inches='tight',
                 )
-                fig_width, fig_height = grid.fig.get_size_inches()
-                legend_height = 0.6
-                grid.fig.set_size_inches(fig_width, fig_height + legend_height)
-                grid.fig.tight_layout()
-                # Save the figure.
-                grid.fig.tight_layout(rect=(0, 0, 1, fig_height /
-                                            (fig_height + legend_height)))
-                for extension in ["pdf", "png", "svg"]:
-                    grid.fig.savefig(
-                        output /
-                        f"{slugify.slugify(env)}{'-sans' if sans else ''}.{extension}",
-                        dpi=300,
-                        bbox_inches='tight',
-                    )
 
     logger.info("Done")
 

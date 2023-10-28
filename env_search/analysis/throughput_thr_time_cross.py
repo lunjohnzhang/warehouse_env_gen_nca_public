@@ -20,7 +20,7 @@ plt.rcParams.update({
 def throughput_thr_time_cross(
     all_logdirs_plot,
     ax=None,
-    add_legend=False,
+    add_legend=True,
     save_fig=True,
 ):
     if ax is None:

@@ -23,7 +23,7 @@ plt.rcParams.update({
 def throughput_vs_n_agents_cross(
     all_logdirs_plot,
     ax=None,
-    add_legend=False,
+    add_legend=True,
     save_fig=True,
 ):
     min_agent_num = np.inf
