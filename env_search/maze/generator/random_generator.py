@@ -32,7 +32,7 @@ def random_generate(
     n_gen=10,
     path_len_low_tol=0.5,
     path_len_up_tol=1.5,
-    n_workers=100,
+    n_workers=32,
     batch_size=100,
 ):
     """
