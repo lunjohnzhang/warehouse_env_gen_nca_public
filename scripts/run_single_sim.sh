@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USAGE="Usage: bash scripts/run_single_sim.sh SIM_CONFIG MAP_FILE AGENT_NUM N_EVALS MODE N_SIM N_WORKERS DOMAIN"
+USAGE="Usage: bash scripts/run_single_sim.sh SIM_CONFIG MAP_FILE AGENT_NUM AGENT_NUM_STEP_SIZE N_EVALS MODE N_SIM N_WORKERS DOMAIN -r RELOAD"
 
 SIM_CONFIG="$1"
 MAP_FILE="$2"

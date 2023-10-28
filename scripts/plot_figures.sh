@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USAGE="Usage: bash scripts/plot_figures.sh LOGDIR"
+USAGE="Usage: bash scripts/plot_figures.sh MODE LOGDIR"
 
 MANIFEST="$1"
 MODE="$2"

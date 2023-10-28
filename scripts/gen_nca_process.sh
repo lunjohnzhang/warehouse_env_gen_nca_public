@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USAGE="Usage: bash scripts/gen_nca_process.sh DOMAIN LOGDIR SEED_ENV_PATH MODE NCA_ITER NCA_ONLY [SIM_SCORE_WITH] [QUERY]"
+USAGE="Usage: bash scripts/gen_nca_process.sh DOMAIN LOGDIR SEED_ENV_PATH MODE NCA_ITER NCA_ONLY -s SIM_SCORE_WITH -q QUERY"
 
 DOMAIN="$1"
 LOGDIR="$2"

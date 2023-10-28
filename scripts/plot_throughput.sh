@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USAGE="Usage: bash scripts/plot_throughput.sh LOGDIR MODE"
+USAGE="Usage: bash scripts/plot_throughput.sh LOGDIR MODE -l2 LOGDIR2"
 
 LOGDIR="$1"
 MODE="$2"

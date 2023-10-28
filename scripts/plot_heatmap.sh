@@ -1,6 +1,6 @@
 #!/bin/bash
 
-USAGE="Usage: bash scripts/plot_heatmap.sh LOGDIR MODE DOMAIN TRANSPOSE_BCS HEATMAP_ONLY"
+USAGE="Usage: bash scripts/plot_heatmap.sh LOGDIR MODE DOMAIN -t TRANSPOSE_BCS -h HEATMAP_ONLY"
 
 LOGDIR="$1"
 MODE="$2"
