@@ -47,16 +47,6 @@ This is a hybrid C++/Python project. The simulation environment is written in C+
 
 If you are in mainland China, please use the corresponding `build_container_cn.sh` script to build the singularity container. It will use the local mirrors in China to download relevant packages (mainly debian and python), which is much faster.
 
-### Troubleshooting
-
-1. If you encounter the following error while running experiments in the Singularity container:
-
-   ```
-   container creation failed: mount /proc/self/fd/3->/usr/local/var/singularity/mnt/session/rootfs error: while mounting image`/proc/self/fd/3: failed to find loop device: no loop devices available
-   ```
-
-   Please try downgrading/upgrading the Linux kernel version to `5.15.0-67-generic`, as suggested in [this Github issue](https://github.com/sylabs/singularity/issues/1499).
-
 ## Optimizing Environments
 
 ### Training Logging Directory Manifest
@@ -206,6 +196,26 @@ For size `S_eval`:
 | Human-designed manufacture       | maps/manufacture/human/manufacture_xxlarge_1700_stations.json                                                                               |
 | CMA-MAE (a=5) manufacture, opt   | maps/manufacture/ours/xxlarge/manufacture_xxlarge_cma-mae_global_opt_repaired_one_endpt_throughput-hamming_a=5_sw=5_iter=200.json           |
 
+### Generate Environments with Trained NCA
+
+To generate environments with trained NCA stored in the logging directories, run the following:
+
+```
+bash scripts/gen_nca_process.sh DOMAIN LOGDIR SEED_ENV_PATH MODE NCA_ITER NCA_ONLY \
+    -s SIM_SCORE_WITH -q QUERY
+```
+
+- `DOMAIN`: `kiva`, `manufacture`, or `maze`
+- `LOGDIR`: path of log directory
+- `SEED_ENV_PATH`: path of the initial environment file
+- `MODE`: `best` or `idx`. `best` selects the best NCA generator from the archive according to the objective. `idx` selects NCA of specific index from the archive. The queried index is specified from `QUERY` parameter, see below. **Note: only manufacturing and maze domains support `idx` mode**.
+- `NCA_ITER`: number of iteration to run the NCA generator
+- `NCA_ONLY`: if `True`, only runs NCA, otherwise also runs MILP repair
+- `SIM_SCORE_WITH`: optional. Path of an environment. If provided, compute the similarity score between generated environment and the provided environment.
+- `QUERY`: optional. Index of the NCA generator to select from the archive under `idx` mode. For example `"50,50"` chooses the elite stored at index `[50, 50]` of the archive.
+
+The generated environment will be stored to a directory named `nca_process_<env_size>_iter=<NCA_ITER>` under `LOGDIR` along with relevant metrics (such as the similarity score).
+
 ## Evaluate the Warehouse and Manufacture Environments
 
 ### Running Simulations
@@ -213,17 +223,31 @@ For size `S_eval`:
 After getting the environments, we want to evaluate the environments by running simulations. To do so in the provided agent-based simulator, run the following:
 
 ```
-bash scripts/run_single_sim.sh SIM_CONFIG MAP_FILE AGENT_NUM AGENT_NUM_STEP_SIZE N_EVALS MODE N_SIM N_WORKERS DOMAIN [RELOAD]
+bash scripts/run_single_sim.sh SIM_CONFIG MAP_FILE AGENT_NUM AGENT_NUM_STEP_SIZE \
+    N_EVALS MODE N_SIM N_WORKERS DOMAIN -r RELOAD
 ```
 
-Therefore two modes associated with the `MODE` parameter, namely `inc_agents` and `constant`.
+- `SIM_CONFIG`: gin simulation configuration file, stored under `pure_simulation` directory under `config/<domain>`
+- `MAP_FILE`: path of the environment to run the simulations in
+- `AGENT_NUM`: number of agent to start with while running simulations
+- `AGENT_NUM_STEP_SIZE`: step size of the number of agents to run simulations
+- `N_EVALS`: number of evaluations to run, interpreted differently under different modes, see example below
+- `MODE`: `inc_agents` or `constant`, see example below
+- `N_SIM`: number of simulations to run
+- `N_WORKERS`: number of processes to run in parallel
+- `DOMAIN`: `kiva`, `manufacture`, or `maze`
+- `RELOAD`: optional, log directory to reload an experiment
 
-With `inc_agents` mode, the script will run simulations on the provided environment with an increment number of agents. Specifically, starting with `AGENT_NUM`, it increment the number by step size of `AGENT_NUM_STEP_SIZE`, until the number of agents reaches `AGENT_NUM + N_EVALS`. For each number of agents, it runs the simulation `N_SIM` times with seeds from `0` to `N_SIM - 1`. All simulations run in parallel on `N_WORKERS` processes.
+There are two modes associated with the `MODE` parameter, namely `inc_agents` and `constant`.
+
+With `inc_agents` mode, the script will run simulations on the provided environment with an increment number of agents. Specifically, starting with `AGENT_NUM`, it increment the number by step size of `AGENT_NUM_STEP_SIZE`, until the number of agents reaches `AGENT_NUM + N_EVALS`. For each number of agents, it runs the simulations `N_SIM` times with seeds from `0` to `N_SIM - 1`. All simulations run in parallel on `N_WORKERS` processes.
 
 For example, the following command:
 
 ```
-bash scripts/run_single_sim.sh config/warehouse/pure_simulation/RHCR.gin maps/warehouse/human/kiva_large_w_mode.json 50 10 301 inc_agents 50 28 kiva
+bash scripts/run_single_sim.sh config/warehouse/pure_simulation/RHCR.gin \
+    maps/warehouse/human/kiva_large_w_mode.json \
+    50 10 301 inc_agents 50 28 kiva
 ```
 
 runs 50 simulations with 50 to 351 agents, increment in step size of 10, in the environment `maps/warehouse/human/kiva_large_w_mode.json` with simulation config `config/warehouse/pure_simulation/RHCR.gin` in the warehouse domain.
@@ -233,7 +257,9 @@ With `constant` mode, the script will run simulations on the provided environmen
 For example, the following command:
 
 ```
-bash scripts/run_single_sim.sh config/manufacture/pure_simulation/RHCR.gin maps/manufacture/human/manufacture_large_93_stations.json 200 10 100 constant 50 28 manufacture
+bash scripts/run_single_sim.sh config/manufacture/pure_simulation/RHCR.gin \
+    maps/manufacture/human/manufacture_large_93_stations.json \
+    200 10 100 constant 50 28 manufacture
 ```
 
 runs 100 simulations with 200 agents in environment `maps/manufacture/human/manufacture_large_93_stations.json` with simulation config `config/manufacture/pure_simulation/RHCR.gin`.
@@ -291,22 +317,22 @@ bash scripts/plot_throughput.sh <eval_exp_name> cross_thr_time
 
 In our experiments, we use CMA-MAE to train a collection of NCA generators and generate environments of size `S` and `S_eval`, getting the following throughput compared with human-designed and DSAGE optimized environments:
 
-| Domain             | Algorithm                 | Throughput (`S_{train}`) | Throughput (`S_{eval}`) |
-| ------------------ | ------------------------- | ------------------------ | ----------------------- |
-| Warehouse (even)   | CMA-MAE (a=0)             | 6.79 &plusmn; 0.00       | N/A                     |
-| Warehouse (even)   | CMA-MAE (a=1)             | 6.73 &plusmn; 0.00       | N/A                     |
-| Warehouse (even)   | CMA-MAE (a=5)             | 6.74 &plusmn; 0.00       | 16.01 &plusmn; 0.00     |
-| Warehouse (even)   | DSAGE (a=5)               | 6.35 &plusmn; 0.00       | N/A                     |
-| Warehouse (even)   | Human                     | N/A                      | N/A                     |
-| Warehouse (uneven) | CMA-MAE (a=0)             | 6.89 &plusmn; 0.00       | 12.32 &plusmn; 0.01     |
-| Warehouse (uneven) | CMA-MAE (a=1)             | 6.70 &plusmn; 0.00       | 11.56 &plusmn; 0.01     |
-| Warehouse (uneven) | CMA-MAE (a=5)             | 6.82 &plusmn; 0.00       | 12.03 &plusmn; 0.00     |
-| Warehouse (uneven) | DSAGE (a=5)               | 6.40 &plusmn; 0.00       | N/A                     |
-| Warehouse (uneven) | Human                     | N/A                      | N/A                     |
-| Manufacture        | CMA-MAE (a=5, opt)        | 6.82 &plusmn; 0.00       | 23.11 &plusmn; 0.01     |
-| Manufacture        | CMA-MAE (a=5, comp DSAGE) | 6.61 &plusmn; 0.00       | N/A                     |
-| Manufacture        | DSAGE (a=5)               | 5.61 &plusmn; 0.12       | N/A                     |
-| Manufacture        | Human                     | 5.92 &plusmn; 0.00       | N/A                     |
+| Domain             | Algorithm                 | Throughput (`S`)   | Throughput (`S_eval`) |
+| ------------------ | ------------------------- | ------------------ | --------------------- |
+| Warehouse (even)   | CMA-MAE (a=0)             | 6.79 &plusmn; 0.00 | N/A                   |
+| Warehouse (even)   | CMA-MAE (a=1)             | 6.73 &plusmn; 0.00 | N/A                   |
+| Warehouse (even)   | CMA-MAE (a=5)             | 6.74 &plusmn; 0.00 | 16.01 &plusmn; 0.00   |
+| Warehouse (even)   | DSAGE (a=5)               | 6.35 &plusmn; 0.00 | N/A                   |
+| Warehouse (even)   | Human                     | N/A                | N/A                   |
+| Warehouse (uneven) | CMA-MAE (a=0)             | 6.89 &plusmn; 0.00 | 12.32 &plusmn; 0.01   |
+| Warehouse (uneven) | CMA-MAE (a=1)             | 6.70 &plusmn; 0.00 | 11.56 &plusmn; 0.01   |
+| Warehouse (uneven) | CMA-MAE (a=5)             | 6.82 &plusmn; 0.00 | 12.03 &plusmn; 0.00   |
+| Warehouse (uneven) | DSAGE (a=5)               | 6.40 &plusmn; 0.00 | N/A                   |
+| Warehouse (uneven) | Human                     | N/A                | N/A                   |
+| Manufacture        | CMA-MAE (a=5, opt)        | 6.82 &plusmn; 0.00 | 23.11 &plusmn; 0.01   |
+| Manufacture        | CMA-MAE (a=5, comp DSAGE) | 6.61 &plusmn; 0.00 | N/A                   |
+| Manufacture        | DSAGE (a=5)               | 5.61 &plusmn; 0.12 | N/A                   |
+| Manufacture        | Human                     | 5.92 &plusmn; 0.00 | N/A                   |
 
 ## Scaling RL Policy in Maze Domain
 
@@ -331,12 +357,30 @@ The command generates 100 maze environments the path length from start to goal o
 Then, to run the simulations in the baseline environments:
 
 ```
-bash scripts/run_maze_baseline_envs.sh <baseline_envs> 100
+bash scripts/run_maze_baseline_envs.sh <baseline_envs> 100 32
 ```
 
-which runs 100 simulations in each of the baseline maze environments under `<baseline_envs>` and store the results there.
+which runs 100 simulations in each of the baseline maze environments under `<baseline_envs>` with 32 parallel processes and store the results there.
 
 In our experiments, we obtain 22.3% as the average success rate with 3.0% as the standard error. In comparison, our NCA generated maze environment have success rate 93%.
+
+
+### Troubleshooting
+
+1. If you encounter the following error while running experiments in the Singularity container:
+
+   ```
+   container creation failed: mount /proc/self/fd/3->/usr/local/var/singularity/mnt/session/rootfs error: while mounting image`/proc/self/fd/3: failed to find loop device: no loop devices available
+   ```
+
+   Please try downgrading/upgrading the Linux kernel version to `5.15.0-67-generic`, as suggested in [this Github issue](https://github.com/sylabs/singularity/issues/1499).
+
+
+1. On Linux, if you are running anything in the container from external drivers mounted to the home driver (e.g. `/mnt/project`), you need to add `--bind /mnt/project:/mnt/project` to the singularity command in order to bind that external driver also to the container. For example, if you are running an experiment from an external driver, run with:
+    ```
+    bash scripts/run_local.sh CONFIG SEED NUM_WORKERS -p /mnt/project
+    ```
+    The `-p` argument helps you add the `--bind` argument to the singularity command in the script.
 
 ## License
 
