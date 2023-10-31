@@ -1,6 +1,6 @@
 # Arbitrarily Scalable Environment Generators via Neural Cellular Automata
 
-This repository is the official implementation of **Arbitrarily Scalable Environment Generators via Neural Cellular Automata** published in NeurIPS 2023. The repository builds on top of the repository of [Multi-Robot Coordination and Layout Design for Automated Warehousing](https://github.com/lunjohnzhang/warehouse_env_gen_public).
+This repository is the official implementation of **[Arbitrarily Scalable Environment Generators via Neural Cellular Automata](https://arxiv.org/abs/2310.18622)** published in NeurIPS 2023. The repository builds on top of the repository of [Multi-Robot Coordination and Layout Design for Automated Warehousing](https://github.com/lunjohnzhang/warehouse_env_gen_public).
 
 ## Installation
 
